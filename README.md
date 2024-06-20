@@ -13,15 +13,15 @@
 - viewing report  
   `npx playwright show-report`
 
+## Codegen:
+
+`npx playwright codegen https://www.bing.com/search?form=MY02CC&OCID=MY02CC&q=Bing+AI&showconv=1`
+
+## Headed UI mode:
+
+`npx playwright test --ui`
+
 ## GitHub
 
-- project code: https://github.com/dudziakm/testPw
-- CI/CD (Actions): https://github.com/dudziakm/testPw/actions
-
-## codegen:
-
-npx playwright codegen https://www.bing.com/search?form=MY02CC&OCID=MY02CC&q=Bing+AI&showconv=1
-
-## headed UI mode:
-
-npx playwright test --ui
+- project code: https://github.com/dudziakm/bingAiTests
+- CI/CD (Actions): https://github.com/dudziakm/bingAiTests/actions

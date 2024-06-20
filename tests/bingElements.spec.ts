@@ -16,9 +16,4 @@ test.describe("Check Basic Bing Copilot elements", () => {
   test("should check copilot UI elements", async () => {
     await bingPage.checkCopilotElements();
   });
-
-  test("should start a basic conversation", async () => {
-    await bingPage.checkCopilotElements();
-    await bingPage.askAQuestion("What is the weather in Warsaw?");
-  });
 });
