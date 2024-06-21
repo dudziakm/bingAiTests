@@ -13,9 +13,6 @@ export default defineConfig({
   },
   use: {
     baseURL: "https://www.bing.com/",
-    // baseURL:
-    // "https://www.bing.com/search?form=MY02CC&OCID=MY02CC&q=Bing+AI&showconv=1",
-    // baseURL: "https://www.wp.pl",
     trace: "on-first-retry",
   },
 

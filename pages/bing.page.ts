@@ -24,15 +24,25 @@ export class BingPage {
   questionSection = this.page.locator("cib-message-group");
   answerSection = this.page.locator(".ac-adaptiveCard");
   continueButton = this.page.locator("button.get-started-btn");
+  answerActionsSection = this.page.locator(".has-bot-actions");
+  privacySection = this.page.locator(".privacy-statement");
+  suggestionBar = this.page.locator("cib-suggestion-bar");
 
   async open() {
     await this.page.goto("/");
+    await this.closeCookiesPopup();
+  }
 
-    if (await this.cookiesAcceptButton.isVisible()) {
+  async closeCookiesPopup() {
+    try {
+      await this.cookiesAcceptButton.waitFor({
+        state: "visible",
+        timeout: 5000,
+      });
       await this.cookiesAcceptButton.click();
       console.log("Button clicked!");
-    } else {
-      console.log("Button not visible.");
+    } catch (error) {
+      console.log("Button not visible or did not appear within timeout.");
     }
   }
 
@@ -40,13 +50,14 @@ export class BingPage {
     await this.page.goto(
       `/search?form=MY02CC&OCID=MY02CC&q=${searchPhrase}&showconv=1`
     );
+    await this.closeCookiesPopup();
   }
 
   async openCopilot() {
     await this.page.goto(
       "/search?form=MY02CC&OCID=MY02CC&q=Bing+AI&showconv=1"
     );
-    await this.cookiesAcceptButton.click();
+    await this.closeCookiesPopup();
   }
 
   async checkSearchElements() {
@@ -62,6 +73,8 @@ export class BingPage {
   }
 
   async askAQuestion(question: string) {
+    await this.closeCookiesPopup();
+
     await this.askMeAnythingInput.fill(question);
     await this.copilotSubmitButton.click();
     await expect(this.stopRespondingButton).toBeVisible();
@@ -76,7 +89,19 @@ export class BingPage {
       .isVisible();
 
     // Answer section is visible:
-    await expect(this.answerSection).toBeVisible();
-    await expect(this.continueButton).toBeVisible();
+    await expect(this.answerSection).toBeVisible({ timeout: 25000 });
+    await expect(this.suggestionBar).toBeVisible({ timeout: 15000 });
+  }
+
+  async verifySimpleResult(expectedResult: string) {
+    await expect(this.page.locator(".ac-adaptiveCard")).toContainText(
+      expectedResult
+    );
+  }
+
+  async verifyComplicatedMathResult(expectedResult: string) {
+    await expect(this.page.locator(".ac-adaptiveCard strong")).toHaveText(
+      expectedResult
+    );
   }
 }
