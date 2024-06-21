@@ -27,7 +27,13 @@ export class BingPage {
 
   async open() {
     await this.page.goto("/");
-    await this.cookiesAcceptButton.click();
+
+    if (await this.cookiesAcceptButton.isVisible()) {
+      await this.cookiesAcceptButton.click();
+      console.log("Button clicked!");
+    } else {
+      console.log("Button not visible.");
+    }
   }
 
   async searchWithCopilot(searchPhrase: string) {
