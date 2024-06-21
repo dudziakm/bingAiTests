@@ -7,9 +7,7 @@ test.describe("Check Basic Bing Copilot elements", () => {
 
   test.beforeEach(async ({ page }) => {
     bingPage = new BingPage(page);
-
-    await bingPage.open();
-    await bingPage.searchWithCopilot("Bing+AI");
+    await bingPage.openCopilot();
   });
 
   test("should start a basic conversation", async () => {

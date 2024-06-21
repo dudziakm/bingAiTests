@@ -28,6 +28,9 @@ export class BingPage {
   privacySection = this.page.locator(".privacy-statement");
   suggestionBar = this.page.locator("cib-suggestion-bar");
 
+  // image generation elements
+  imagePlaceholderElement = this.page.locator("#b_content #gi_content");
+
   async open() {
     await this.page.goto("/");
     await this.closeCookiesPopup();
@@ -103,5 +106,13 @@ export class BingPage {
     await expect(this.page.locator(".ac-adaptiveCard strong")).toHaveText(
       expectedResult
     );
+  }
+
+  async verifyImageGeneration() {
+    await this.page
+      .locator("iframe")
+      .filter({ hasText: "Sign in to create images" })
+      .first()
+      .isVisible();
   }
 }

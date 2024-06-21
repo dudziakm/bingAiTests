@@ -10,7 +10,6 @@ test.describe("Check Basic Bing Copilot elements", () => {
 
     await bingPage.open();
     await bingPage.openCopilot();
-    // await bingPage.searchWithCopilot("Bing+AI");
   });
 
   test("should do a simple math: 2 + 2", async () => {

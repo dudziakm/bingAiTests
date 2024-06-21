@@ -10,10 +10,10 @@ test.describe("Check Basic Bing Copilot elements", () => {
 
     await bingPage.open();
     await bingPage.checkSearchElements();
-    await bingPage.searchWithCopilot("Bing+AI");
   });
 
   test("should check copilot UI elements", async () => {
+    await bingPage.searchWithCopilot("Bing+AI");
     await bingPage.checkCopilotElements();
   });
 });
