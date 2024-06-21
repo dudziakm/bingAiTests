@@ -76,6 +76,21 @@ export class BingPage {
   }
 
   async askAQuestion(question: string) {
+    await this.fillQuestionInput(question);
+
+    // Answer section is visible:
+    await expect(this.answerSection.last()).toBeVisible({ timeout: 25000 });
+    await expect(this.suggestionBar).toBeVisible({ timeout: 15000 });
+  }
+
+  async askAnUnanswerableQuestion(question: string) {
+    await this.fillQuestionInput(question);
+
+    // Answer section is visible:
+    await expect(this.answerSection.last()).toBeVisible({ timeout: 25000 });
+  }
+
+  async fillQuestionInput(question: string) {
     await this.closeCookiesPopup();
 
     await this.askMeAnythingInput.fill(question);
@@ -83,23 +98,42 @@ export class BingPage {
     await expect(this.stopRespondingButton).toBeVisible();
 
     // Question section is visible:
-    await expect(this.questionSection).toBeVisible();
+    await expect(this.questionSection.first()).toBeVisible();
 
     await this.page
       .locator("div")
       .filter({ hasText: question })
       .first()
       .isVisible();
+  }
 
-    // Answer section is visible:
-    await expect(this.answerSection).toBeVisible({ timeout: 25000 });
-    await expect(this.suggestionBar).toBeVisible({ timeout: 15000 });
+  async clickContinue() {
+    try {
+      await this.continueButton.waitFor({
+        state: "visible",
+        timeout: 5000,
+      });
+      await this.continueButton.click();
+      console.log("Button clicked!");
+    } catch (error) {
+      console.log("Button not visible or did not appear within timeout.");
+    }
   }
 
   async verifySimpleResult(expectedResult: string) {
-    await expect(this.page.locator(".ac-adaptiveCard")).toContainText(
+    await expect(this.page.locator(".ac-adaptiveCard").last()).toContainText(
       expectedResult
     );
+  }
+
+  async verifyFewDifferentAnswers(expectedResults) {
+    const text = await this.page.locator(".ac-adaptiveCard").last().innerText();
+    const regex = new RegExp(expectedResults.join("|"), "i");
+    expect(text).toMatch(regex);
+  }
+
+  async waitForTheResults() {
+    await this.page.waitForTimeout(2000);
   }
 
   async verifyComplicatedMathResult(expectedResult: string) {
