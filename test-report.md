@@ -22,6 +22,14 @@ This document summarizes the results of the automated tests run on Bing AI.
 - `mathVerification.spec.ts: › Check Basic Bing Copilot elements › should do a simple math: 2 + 2 × 2 ÷ 2`
 - `mathVerification.spec.ts › Check Basic Bing Copilot elements › should do a simple math: 3 + 5 × 2 ÷ 4 - 1`
 
+### Logs and Screenshots
+
+More details are available in the Actions section:
+
+- last runs: https://github.com/dudziakm/bingAiTests/actions
+- one single result: https://github.com/dudziakm/bingAiTests/actions/runs/9623257774/job/26545496589
+- the example of the report: https://github.com/dudziakm/bingAiTests/actions/runs/9623257774/artifacts/1627166117
+
 ## Conclusion
 
 The overall performance is not perfect. I needed to add a few fluid/flexible timeouts to the tests.
