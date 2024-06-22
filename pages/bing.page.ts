@@ -121,13 +121,11 @@ export class BingPage {
   }
 
   async verifySimpleResult(expectedResult: string) {
-    await expect(this.page.locator(".ac-adaptiveCard").last()).toContainText(
-      expectedResult
-    );
+    await expect(this.answerSection.last()).toContainText(expectedResult);
   }
 
   async verifyFewDifferentAnswers(expectedResults) {
-    const text = await this.page.locator(".ac-adaptiveCard").last().innerText();
+    const text = await this.answerSection.last().textContent();
     const regex = new RegExp(expectedResults.join("|"), "i");
     expect(text).toMatch(regex);
   }

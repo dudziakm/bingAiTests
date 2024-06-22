@@ -8,6 +8,7 @@
   - [Headed UI Mode](#headed-ui-mode)
   - [GitHub](#github)
 - [Test Plan](test-plan.md)
+- [Test Files](test-files.md)
 - [Test Report](test-report.md)
 - [Possible Enhancements](possible-enhancements.md)
 
