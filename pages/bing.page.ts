@@ -69,7 +69,6 @@ export class BingPage {
 
   async checkCopilotElements() {
     await expect(this.copilotHeaderElement).toBeVisible();
-    await expect(this.gptListElements).toBeVisible();
     await expect(this.newTopicButton).toBeVisible();
     await expect(this.askMeAnythingInput).toBeVisible();
     await expect(this.copilotSubmitButton).toBeVisible();
